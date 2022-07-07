@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Model Explorer</title>
+		<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='21' cy='26' r='2'/><circle cx='21' cy='6' r='2'/><circle cx='4' cy='16' r='2'/><path d='M28,12a3.9962,3.9962,0,0,0-3.8579,3H19.8579a3.9655,3.9655,0,0,0-5.4914-2.6426L11.19,8.3872A3.9626,3.9626,0,0,0,12,6a4,4,0,1,0-4,4,3.96,3.96,0,0,0,1.6338-.3574l3.176,3.97a3.9239,3.9239,0,0,0,0,4.7744l-3.1758,3.97A3.96,3.96,0,0,0,8,22a4,4,0,1,0,4,4,3.9624,3.9624,0,0,0-.81-2.3872l3.1758-3.97A3.9658,3.9658,0,0,0,19.8579,17h4.2842A3.9934,3.9934,0,1,0,28,12ZM6,6A2,2,0,1,1,8,8,2.0023,2.0023,0,0,1,6,6ZM8,28a2,2,0,1,1,2-2A2.0023,2.0023,0,0,1,8,28Zm8-10a2,2,0,1,1,2-2A2.0023,2.0023,0,0,1,16,18Zm12,0a2,2,0,1,1,2-2A2.0023,2.0023,0,0,1,28,18Z'/></svg>">
+		<link rel="stylesheet" href="../common/css/carbon-components.min.css" />
+		 <link rel="stylesheet" href="../common/css/vis-network.min.css" /> 
+         <style>
+            mark {
+              font-weight: bold;
+              background-color: white;
+            }
+         </style>
+	</head>
+
+	<body class="bx--body" style="background-color:#f3f3f3;" onload="init()">
+
+
+		<header id="data-header" class="bx--header" role="banner" aria-label="IBM Platform Name" data-header>
+
+			<button class="bx--header__menu-trigger bx--header__action" aria-label="Open menu" title="Open menu" data-navigation-menu-panel-label-expand="Open menu" data-navigation-menu-panel-label-collapse="Close menu"data-navigation-menu-target="#navigation-menu-module-switcher">
+				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="bx--navigation-menu-panel-collapse-icon" width="20" height="20" viewBox="0 0 32 32">
+					<path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4l6.6 6.6L8 22.6 9.4 24l6.6-6.6 6.6 6.6 1.4-1.4-6.6-6.6L24 9.4z" />
+				</svg>
+				<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="bx--navigation-menu-panel-expand-icon" width="20" height="20" viewBox="0 0 20 20">
+					<path d="M2 15h16v1.2H2zm0-3.8h16v1.2H2zm0-3.7h16v1.2H2zm0-3.7h16V5H2z" />
+				</svg>
+			</button>
+		
+			<span style="font-weight:600" class="bx--header__name">
+				&nbsp;&nbsp;Model Explorer&nbsp;
+			</span>
+
+			<nav class="bx--header__nav" aria-label="Platform Name" data-header-nav >	
+				<ul class="bx--header__menu-bar" role="menubar" aria-label="Platform Name" >
+					<li>
+						<a id="header-menu-2-browse" class="bx--header__menu-item bx--header__menu-item--selected" href="javascript:void(0)" role="menuitem" tabindex="0" data-target=".tab-2-browse" aria-controls="tab-panel-2-browse">
+							<svg style="fill:#f3f3f3" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+								<path d="M26,22a3.9553,3.9553,0,0,0-2.0193.5667L20.167,18.7529a4.9654,4.9654,0,0,0,0-5.5058L22.714,10.7A3.0284,3.0284,0,1,0,21.3,9.286l-2.547,2.547a4.9654,4.9654,0,0,0-5.5058,0L9.4332,8.0191A3.9553,3.9553,0,0,0,10,6a4,4,0,1,0-4,4,3.9553,3.9553,0,0,0,2.0191-.5668l3.8139,3.8139a4.9654,4.9654,0,0,0,0,5.5058L8.0192,22.5668A3.9556,3.9556,0,0,0,6,22a4,4,0,1,0,4,4,3.9553,3.9553,0,0,0-.5667-2.0192l3.8138-3.8138A4.9686,4.9686,0,0,0,15,20.8989v3.2848a3,3,0,1,0,2,0V20.8989a4.9686,4.9686,0,0,0,1.7529-.7319l3.8138,3.8137A3.9553,3.9553,0,0,0,22,26a4,4,0,1,0,4-4ZM16,13a3,3,0,1,1-3,3A3.0033,3.0033,0,0,1,16,13ZM4,6A2,2,0,1,1,6,8,2.002,2.002,0,0,1,4,6ZM6,28a2,2,0,1,1,2-2A2.0023,2.0023,0,0,1,6,28Zm20,0a2,2,0,1,1,2-2A2.0027,2.0027,0,0,1,26,28Z"/>
+							</svg>
+							&nbsp;
+							Explore
+						</a>
+					</li>
+					<li>
+						<a id="header-menu-0-import-vis" class="bx--header__menu-item" href="javascript:void(0)" role="menuitem" tabindex="0" data-target=".tab-0-import-vis" aria-controls="tab-panel-0-import-vis">
+							<svg style="fill:#f3f3f3" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+								<polygon points="28 19 14.83 19 17.41 16.41 16 15 11 20 16 25 17.41 23.59 14.83 21 28 21 28 19"/><path d="M24,14V10a1,1,0,0,0-.29-.71l-7-7A1,1,0,0,0,16,2H6A2,2,0,0,0,4,4V28a2,2,0,0,0,2,2H22a2,2,0,0,0,2-2V26H22v2H6V4h8v6a2,2,0,0,0,2,2h6v2Zm-8-4V4.41L21.59,10Z"/>
+							</svg>
+							&nbsp;
+							Import Visualisation
+						</a>
+					</li>
+					<li>
+						<a id="header-menu-1-restore" class="bx--header__menu-item" href="javascript:void(0)" role="menuitem" tabindex="0" data-target=".tab-1-restore" aria-controls="tab-panel-1-restore">
+							<svg style="fill:#f3f3f3" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+								<path d="M27,6v5H17V6H27m0-2H17a2,2,0,0,0-2,2v5a2,2,0,0,0,2,2H27a2,2,0,0,0,2-2V6a2,2,0,0,0-2-2Z"/><path d="M12,25H6V17h6V15H6a2,2,0,0,0-2,2v8a2,2,0,0,0,2,2h6Z"/><polygon points="30 20 16.828 20 19.414 17.414 18 16 13 21 18 26 19.414 24.586 16.828 22 30 22 30 20"/><path d="M11,6v5H6V6h5m0-2H6A2,2,0,0,0,4,6v5a2,2,0,0,0,2,2h5a2,2,0,0,0,2-2V6a2,2,0,0,0-2-2Z"/>
+							</svg>
+							&nbsp;
+							Restore Library
+						</a>
+					</li>
+					<li>
+						<a id="header-menu-3-help" class="bx--header__menu-item" href="javascript:void(0)" role="menuitem" tabindex="0" data-target=".tab-3-help" aria-controls="tab-panel-3-help">
+							<svg style="fill:#f3f3f3" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+								<path d="M16,2A14,14,0,1,0,30,16,14,14,0,0,0,16,2Zm0,26A12,12,0,1,1,28,16,12,12,0,0,1,16,28Z"/><circle cx="16" cy="23.5" r="1.5"/><path d="M17,8H15.5A4.49,4.49,0,0,0,11,12.5V13h2v-.5A2.5,2.5,0,0,1,15.5,10H17a2.5,2.5,0,0,1,0,5H15v4.5h2V17a4.5,4.5,0,0,0,0-9Z"/>
+							</svg>
+							&nbsp;
+							Help
+						</a>
+					</li>       
+				</ul>
+			</nav>
+
+			<span style="position: fixed;right:0" class="module-viewer" aria-hidden="false">	
+				<div class="bx--header__global">
+					<button id="buttton-close-product-switcher-menu" class="bx--header__menu-trigger bx--header__action" aria-label="Menu" title="Menu" data-navigation-menu-panel-label-expand="Menu" data-navigation-menu-panel-label-collapse="Close menu" data-product-switcher-target="#switcher-">
+						<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="bx--navigation-menu-panel-expand-icon" width="20" height="20" viewBox="0 0 32 32">
+							<path d="M4 6h24v2H4zm0 18h24v2H4zm0-9h24v2H4z" />
+						</svg>
+						<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="bx--navigation-menu-panel-collapse-icon" width="20" height="20" viewBox="0 0 32 32">
+							<path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4l6.6 6.6L8 22.6 9.4 24l6.6-6.6 6.6 6.6 1.4-1.4-6.6-6.6L24 9.4z" />
+						</svg>
+					</button>
+				</div>
+			</span>
+		   
+		</header>
+
+		
+		<span class="module-viewer" aria-hidden="false" >	
+			<aside class="bx--panel--overlay" id="switcher-" data-product-switcher>
+				<div class="bx--product-switcher">
+					<ul class="bx--product-switcher__product-list">
+
+						<li class="bx--product-list__item">
+							<a id="button-save-to-library-menuitem" class="bx--product-link" tabindex="0" onclick="dialogSaveToLibrary.show();">
+								<div class="bx--product-switcher__icon">
+									<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+										<polygon points="4 20 4 22 7.586 22 2 27.586 3.414 29 9 23.414 9 27 11 27 11 20 4 20"/><rect x="19" y="10" width="7" height="2"/><rect x="19" y="15" width="7" height="2"/><rect x="19" y="20" width="7" height="2"/><path d="M28,5H4A2.002,2.002,0,0,0,2,7V17H4V7H15V27H28a2.002,2.002,0,0,0,2-2V7A2.002,2.002,0,0,0,28,5ZM17,25V7H28l.0015,18Z"/>
+									</svg>
+								</div>
+								<span class="bx--product-link__name">
+									Save To Library 
+								</span>
+							</a>
+						</li>
+
+						<li class="bx--product-list__item">
+							<a id="button-save-to-json-menuitem" class="bx--product-link" tabindex="0" onclick="dialogSaveToJson.show();">
+								<div class="bx--product-switcher__icon">
+									<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+										<polygon points="13 21 26.17 21 23.59 23.59 25 25 30 20 25 15 23.59 16.41 26.17 19 13 19 13 21"/><path d="M22,14V10a1,1,0,0,0-.29-.71l-7-7A1,1,0,0,0,14,2H4A2,2,0,0,0,2,4V28a2,2,0,0,0,2,2H20a2,2,0,0,0,2-2V26H20v2H4V4h8v6a2,2,0,0,0,2,2h6v2Zm-8-4V4.41L19.59,10Z"/>
+									</svg>
+								</div>
+								<span class="bx--product-link__name">
+									Export as JSON
+								</span>
+							</a>
+						</li>
+
+						<!--
+						<li class="bx--product-list__item">
+							<a id="button-load-from-json-menuitem" class="bx--product-link" tabindex="0">
+								<div class="bx--product-switcher__icon">
+									<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+										<polygon points="28 19 14.83 19 17.41 16.41 16 15 11 20 16 25 17.41 23.59 14.83 21 28 21 28 19"/><path d="M24,14V10a1,1,0,0,0-.29-.71l-7-7A1,1,0,0,0,16,2H6A2,2,0,0,0,4,4V28a2,2,0,0,0,2,2H22a2,2,0,0,0,2-2V26H22v2H6V4h8v6a2,2,0,0,0,2,2h6v2Zm-8-4V4.41L21.59,10Z"/>
+									</svg>
+								</div>
+								<span class="bx--product-link__name">
+									Import from JSON
+								</span>
+							</a>
+						</li>
+						-->
+
+						<li class="bx--product-list__item">
+							<a id="button-backup-library-menuitem" class="bx--product-link" tabindex="0" onclick="dialogBackupLibrary.show();">
+								<div class="bx--product-switcher__icon">
+									<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+										<circle cx="7" cy="7" r="1"/><circle cx="7" cy="15" r="1"/><circle cx="7" cy="23" r="1"/><path d="M12,26H4V20h8V18H4V12H22V4a2,2,0,0,0-2-2H4A2,2,0,0,0,2,4V26a2,2,0,0,0,2,2h8ZM4,4H20v6H4Z"/><path d="M28,17v2.4131A6.996,6.996,0,1,0,22,30V28a5,5,0,1,1,4.5762-7H24v2h6V17Z"/>
+									</svg>
+								</div>
+								<span class="bx--product-link__name">
+									Backup Library
+								</span>
+							</a>
+						</li>
+
+						<!--
+						<li class="bx--product-list__item">
+							<a id="button-restore-library-menuitem" class="bx--product-link" tabindex="0">
+								<div class="bx--product-switcher__icon">
+									<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+										<path d="M27,6v5H17V6H27m0-2H17a2,2,0,0,0-2,2v5a2,2,0,0,0,2,2H27a2,2,0,0,0,2-2V6a2,2,0,0,0-2-2Z"/><path d="M12,25H6V17h6V15H6a2,2,0,0,0-2,2v8a2,2,0,0,0,2,2h6Z"/><polygon points="30 20 16.828 20 19.414 17.414 18 16 13 21 18 26 19.414 24.586 16.828 22 30 22 30 20"/><path d="M11,6v5H6V6h5m0-2H6A2,2,0,0,0,4,6v5a2,2,0,0,0,2,2h5a2,2,0,0,0,2-2V6a2,2,0,0,0-2-2Z"/>
+									</svg>
+								</div>
+								<span class="bx--product-link__name">
+									Restore Library
+								</span>
+							</a>
+						</li>
+						-->
+
+						<li class="bx--product-list__item"> 
+							<a id="dialog-graph-svg-export-menuitem" class="bx--product-link" tabindex="0" onclick="dialogGraphSVGExport.show();">
+								<div class="bx--product-switcher__icon">
+									<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+										<path d="M26,24v4H6V24H4v4H4a2,2,0,0,0,2,2H26a2,2,0,0,0,2-2h0V24Z"/><polygon points="6 12 7.41 13.4 15 5.83 15 25 17 25 17 5.83 24.59 13.4 26 12 16 2 6 12"/>
+									</svg>
+								</div>
+								<span class="bx--product-link__name">
+									Export as PNG Image 
+								</span>
+							</a>
+						</li>
+
+					</ul>
+				</div>
+			</aside>
+		</span>
+
+
+		<div class="module-viewer" aria-hidden="false" >
+			<aside class="bx--side-nav" data-side-nav style="position: fixed;top: 3rem;">
+				<nav class="bx--side-nav__navigation" role="navigation" aria-label="Side navigation">
+					<ul class="bx--side-nav__items">
+						<li class="bx--side-nav__item">  
+							<a id="side-menu-2-browse-search" class="bx--side-nav__link" href="javascript:void(0)" onclick="document.getElementById('header-menu-2-browse').click();" data-target=".tab-2-browse-search" aria-controls="tab-panel-2-browse-search">
+								<div class="bx--side-nav__icon bx--side-nav__icon--small">
+									<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+										<path d="M30,28.59,22.45,21A11,11,0,1,0,21,22.45L28.59,30ZM5,14a9,9,0,1,1,9,9A9,9,0,0,1,5,14Z" />
+									</svg>
+								</div>
+								<span class="bx--side-nav__link-text">
+									Search
+								</span>
+							</a>
+						</li>
+						<li class="bx--side-nav__item">
+							<a id="side-menu-2-browse-graph" class="bx--side-nav__link " href="javascript:void(0)" onclick="document.getElementById('header-menu-2-browse').click();" data-target=".tab-2-browse-graph" aria-controls="tab-panel-2-browse-graph">
+								<div class="bx--side-nav__icon bx--side-nav__icon--small">
+									<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+										<circle cx="21" cy="26" r="2"/><circle cx="21" cy="6" r="2"/><circle cx="4" cy="16" r="2"/><path d="M28,12a3.9962,3.9962,0,0,0-3.8579,3H19.8579a3.9655,3.9655,0,0,0-5.4914-2.6426L11.19,8.3872A3.9626,3.9626,0,0,0,12,6a4,4,0,1,0-4,4,3.96,3.96,0,0,0,1.6338-.3574l3.176,3.97a3.9239,3.9239,0,0,0,0,4.7744l-3.1758,3.97A3.96,3.96,0,0,0,8,22a4,4,0,1,0,4,4,3.9624,3.9624,0,0,0-.81-2.3872l3.1758-3.97A3.9658,3.9658,0,0,0,19.8579,17h4.2842A3.9934,3.9934,0,1,0,28,12ZM6,6A2,2,0,1,1,8,8,2.0023,2.0023,0,0,1,6,6ZM8,28a2,2,0,1,1,2-2A2.0023,2.0023,0,0,1,8,28Zm8-10a2,2,0,1,1,2-2A2.0023,2.0023,0,0,1,16,18Zm12,0a2,2,0,1,1,2-2A2.0023,2.0023,0,0,1,28,18Z"/>
+									</svg>
+								</div>
+								<span class="bx--side-nav__link-text">
+									Visualise
+								</span>
+							</a>
+						</li>
+                        
+						<li class="bx--side-nav__item">
+							<a id="side-menu-2-browse-library" class="bx--side-nav__link " href="javascript:void(0)" onclick="document.getElementById('header-menu-2-browse').click();" data-target=".tab-2-browse-library" aria-controls="tab-panel-2-browse-library">
+								<div class="bx--side-nav__icon bx--side-nav__icon--small">
+									<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+                                          <rect x="19" y="10" width="7" height="2"/>
+                                          <rect x="19" y="15" width="7" height="2"/>
+                                          <rect x="19" y="20" width="7" height="2"/>
+                                          <rect x="6" y="10" width="7" height="2"/>
+                                          <rect x="6" y="15" width="7" height="2"/>
+                                          <rect x="6" y="20" width="7" height="2"/>
+                                          <path d="M28,5H4A2.002,2.002,0,0,0,2,7V25a2.002,2.002,0,0,0,2,2H28a2.002,2.002,0,0,0,2-2V7A2.002,2.002,0,0,0,28,5ZM4,7H15V25H4ZM17,25V7H28V25Z"/>
+									</svg>
+								</div>
+								<span class="bx--side-nav__link-text">
+									Library
+								</span>
+							</a>
+						</li>
+
+						<li class="bx--side-nav__item" style="position: fixed;bottom:0;"> 
+							<a id="side-menu-2-browse-about" class="bx--side-nav__link bx--side-nav__link--current" href="javascript:void(0)" onclick="javascript:document.getElementById('header-menu-2-browse').click();" data-target=".tab-2-browse-about" aria-controls="tab-panel-2-browse-about" >
+								<div class="bx--side-nav__icon bx--side-nav__icon--small">
+									<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+										<path d="M16,3A12.92,12.92,0,0,0,3,16v1A13,13,0,0,0,16,30h7V28H16A11,11,0,0,1,5,17V16A10.94,10.94,0,0,1,16,5,10.64,10.64,0,0,1,27,16c0,3.59-1.4,5-3.66,5C21.76,21,21,19.71,21,18V10H19v1.94A3.84,3.84,0,0,0,15.5,10,5.48,5.48,0,0,0,10,15.44v2.12A5.48,5.48,0,0,0,15.5,23a4.28,4.28,0,0,0,4-2.46A4.35,4.35,0,0,0,23.41,23C26.48,23,29,21,29,16A12.72,12.72,0,0,0,16,3Zm3,14.56a3.5,3.5,0,0,1-7,0V15.44a3.5,3.5,0,0,1,7,0Z"></path>
+									</svg>
+								</div>
+								<span class="bx--side-nav__link-text">
+									About
+								</span>
+							</a>
+						</li>
+                        
+					</ul>
+				</nav>
+			</aside>
+		</div>
+
+		
+		<div id="main-content-div">
+
+			<div data-modal id="dialog-graph-svg-export" class="bx--modal" role="dialog" aria-modal="true" aria-describedby="dialog-graph-svg-export-heading" tabindex="-1">
+				<div class="bx--modal-container">
+					<div class="bx--modal-header">
+						<p class="bx--modal-header__heading bx--type-beta" id="dialog-graph-svg-export-heading">
+							Export visualisation as PNG image
+						</p>
+						<button class="bx--modal-close" type="button" data-modal-close aria-label="close modal" >
+							<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--modal-close__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+								<path d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z" />
+							</svg>
+						</button>
+					</div>
+					
+					<div class="bx--modal-content">
+						<div class="bx--form-item">
+							<label for="text-input-graph-svg-export" class="bx--label">
+								Name of file:
+							</label>
+							<input id="text-input-graph-svg-export" type="text" class="bx--text-input" placeholder="image.png" data-modal-primary-focus value="" onchange="document.getElementById('button-graph-svg-export').download = this.value;">
+						</div>
+					</div>
+					
+					<div class="bx--modal-footer">
+						<button class="bx--btn bx--btn--secondary" type="button" data-modal-close>
+							Cancel
+						</button>
+						<a id="button-graph-svg-export" class="bx--btn bx--btn--primary" data-modal-close style="max-width: none; width: 50%; height: 4rem; margin: 0; padding-top: 1rem; padding-bottom: 2rem;">
+							Save
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div data-modal id="dialog-save-to-json" class="bx--modal" role="dialog" aria-modal="true" aria-describedby="dialog-save-to-json-heading" tabindex="-1">
+				<div class="bx--modal-container">
+					<div class="bx--modal-header">
+						<p class="bx--modal-header__heading bx--type-beta" id="dialog-save-to-json-heading">
+							Export scope and layout of current visualisation as JSON file
+						</p>
+						<button class="bx--modal-close" type="button" data-modal-close aria-label="close modal" >
+							<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--modal-close__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+								<path d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z" />
+							</svg>
+						</button>
+					</div>
+					
+					<div class="bx--modal-content">
+						<div class="bx--form-item">
+							<label for="text-input-save-to-json" class="bx--label">
+								Name of file:
+							</label>
+							<input id="text-input-save-to-json" type="text" class="bx--text-input" placeholder="export.json" data-modal-primary-focus value="" onchange="document.getElementById('button-save-to-json').download = this.value;">
+						</div>
+					</div>
+					
+					<div class="bx--modal-footer">
+						<button class="bx--btn bx--btn--secondary" type="button" data-modal-close>
+							Cancel
+						</button>
+						<a id="button-save-to-json" class="bx--btn bx--btn--primary" data-modal-close style="max-width: none; width: 50%; height: 4rem; margin: 0; padding-top: 1rem; padding-bottom: 2rem;">
+							Save
+						</a>
+					</div>
+				</div>
+			</div>
+
+
+			<div data-modal id="dialog-backup-library" class="bx--modal" role="dialog" aria-modal="true" aria-describedby="dialog-backup-library-heading" tabindex="-1">
+				<div class="bx--modal-container">
+					<div class="bx--modal-header">
+						<p class="bx--modal-header__heading bx--type-beta" id="dialog-backup-library-heading">
+							Backup content of library as JSON file
+						</p>
+						<button class="bx--modal-close" type="button" data-modal-close aria-label="close modal" >
+							<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--modal-close__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+								<path d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z" />
+							</svg>
+						</button>
+					</div>
+					
+					<div class="bx--modal-content">
+						<div class="bx--form-item">
+							<label for="text-input-backup-library" class="bx--label">
+								Name of file:
+							</label>
+							<input id="text-input-backup-library" type="text" class="bx--text-input" placeholder="library-backup.json" data-modal-primary-focus value="" onchange="document.getElementById('button-backup-library').download = this.value;">
+						</div>
+					</div>
+					
+					<div class="bx--modal-footer">
+						<button class="bx--btn bx--btn--secondary" type="button" data-modal-close>
+							Cancel
+						</button>
+						<a id="button-backup-library" class="bx--btn bx--btn--primary" data-modal-close style="max-width: none; width: 50%; height: 4rem; margin: 0; padding-top: 1rem; padding-bottom: 2rem;">
+							Save
+						</a>
+					</div>
+				</div>
+			</div>
+            
+            
+			<div data-modal id="dialog-save-to-library" class="bx--modal" role="dialog" aria-modal="true" aria-describedby="dialog-save-to-library-heading" tabindex="-1">
+				<div class="bx--modal-container">
+					<div class="bx--modal-header">
+						<p class="bx--modal-header__heading bx--type-beta" id="dialog-save-to-library-heading">
+							Save copy of current visualisation to library
+						</p>
+						<button class="bx--modal-close" type="button" data-modal-close aria-label="close modal" >
+							<svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--modal-close__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+								<path d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z" />
+							</svg>
+						</button>
+					</div>
+					
+					<div class="bx--modal-content">
+						<div class="bx--form-item">
+							<label for="text-input-save-to-library" class="bx--label">
+								Name of visualisation:
+							</label>
+							<input id="text-input-save-to-library" type="text" class="bx--text-input" placeholder="visualisation-name" data-modal-primary-focus value="" onchange="document.getElementById('button-save-to-library').download = this.value;" onkeyup="if (this.value in visLibrary) {document.getElementById('will-overwrite-warning').style.visibility = 'visible'} else {document.getElementById('will-overwrite-warning').style.visibility = 'hidden'}">
+						</div>
+                        <label id="will-overwrite-warning" class="bx--label" style="margin-top: 1rem; font-style: italic; visibility: hidden">Warning: Visualisation with such name already exists and will be overwritten if you continue.</label>
+					</div>
+					
+					<div class="bx--modal-footer">
+						<button class="bx--btn bx--btn--secondary" type="button" data-modal-close>
+							Cancel
+						</button>
+						<a id="button-save-to-library" class="bx--btn bx--btn--primary" data-modal-close style="max-width: none; width: 50%; height: 4rem; margin: 0; padding-top: 1rem; padding-bottom: 2rem;">
+							Save
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div id="tab-panel-0-import-vis" class="tab-0-import-vis" style="margin: 4rem 4rem" role="tabpanel" aria-labelledby="header-menu-0-import-vis" aria-hidden="true" hidden>
+				<h3 style="font-weight:200">
+					Import Visualisation From JSON
+				</h3>
+
+				<div class="bx--form-item" style="margin-top: 1rem">
+					<strong class="bx--file--label">
+						Import single visualisation replacing the current one
+					</strong>
+					<p class="bx--label-description">
+						Imports visualisation scope and layout from JSON file
+					</p>
+					<div class="bx--file" data-file>
+						<label for="vis-import-id" class="bx--file-btn bx--btn bx--btn--primary bx--btn--sm" role="button" onclick="if(!document.getElementById('import-vis-inline-loading--finished').hidden){inlinLoadingVis.setState('inactive');}" tabindex="0">
+							Select local file
+						</label>
+						<input type="file" class="bx--file-input" id="vis-import-id" data-file-uploader	data-target="[data-file-container]" onchange="javascript:if(this.files.length == 1){document.getElementById('import-vis').disabled=false;}else{document.getElementById('import-vis').disabled=true;};" />
+						<div data-file-container class="bx--file-container"></div>
+					</div>
+				</div>
+
+				<button id="import-vis" class="bx--btn bx--btn--primary"  type="button" onclick="javascript:importVisualisationFromJSON();" disabled>
+					Import from selected file
+				</button>
+			
+				<div id="import-vis-inline-loading" data-inline-loading class="bx--inline-loading" >
+					<div class="bx--inline-loading__animation" >
+						<div data-inline-loading-spinner class="bx--loading bx--loading--small" hidden>
+							<svg class="bx--loading__svg" viewBox="-75 -75 150 150" >
+								<circle class="bx--loading__background" cx="0" cy="0" r="37.5" />
+								<circle class="bx--loading__stroke" cx="0" cy="0" r="37.5" />
+							</svg>
+						</div>
+						<svg data-inline-loading-finished hidden class="bx--inline-loading__checkmark-container bx--inline-loading__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
+							<polyline class="bx--inline-loading__checkmark" points="0.74 3.4 3.67 6.34 9.24 0.74" />
+						</svg>
+					</div>
+					<p data-inline-loading-text-active hidden class="bx--inline-loading__text">
+						Loading data...
+					</p>
+					<p id="import-vis-inline-loading--finished" data-inline-loading-text-finished hidden class="bx--inline-loading__text">
+						Data imported.
+					</p>
+				</div>
+
+			</div>
+
+			<div id="tab-panel-1-restore" class="tab-1-restore" style="margin: 4rem 4rem" role="tabpanel" aria-labelledby="header-menu-1-restore" aria-hidden="true" hidden>
+				<h3 style="font-weight:200">
+					Restore Library From JSON Backup
+				</h3>
+
+				<div class="bx--form-item" style="margin-top: 1rem">
+					<strong class="bx--file--label">
+						Restore the complete visualisation library from JSON backup
+					</strong>
+					<p class="bx--label-description">
+						Imports full library from JSON backup file
+					</p>
+					<div class="bx--file" data-file>
+						<label for="restore-lib-id" class="bx--file-btn bx--btn bx--btn--primary bx--btn--sm" role="button" onclick="if(!document.getElementById('restore-lib-inline-loading--finished').hidden){inlinRestoringLib.setState('inactive');}" tabindex="0">
+							Select local file
+						</label>
+						<input type="file" class="bx--file-input" id="restore-lib-id" data-file-uploader	data-target="[data-file-container]" onchange="javascript:if(this.files.length == 1){document.getElementById('restore-lib').disabled=false;}else{document.getElementById('restore-lib').disabled=true;};" />
+						<div data-file-container class="bx--file-container"></div>
+					</div>
+				</div>
+
+				<button id="restore-lib" class="bx--btn bx--btn--primary"  type="button" onclick="javascript:restoreLibraryFromJSON();" disabled>
+					Import from selected file
+				</button>
+			
+				<div id="restore-lib-inline-loading" data-inline-loading class="bx--inline-loading" >
+					<div class="bx--inline-loading__animation" >
+						<div data-inline-loading-spinner class="bx--loading bx--loading--small" hidden>
+							<svg class="bx--loading__svg" viewBox="-75 -75 150 150" >
+								<circle class="bx--loading__background" cx="0" cy="0" r="37.5" />
+								<circle class="bx--loading__stroke" cx="0" cy="0" r="37.5" />
+							</svg>
+						</div>
+						<svg data-inline-loading-finished hidden class="bx--inline-loading__checkmark-container bx--inline-loading__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
+							<polyline class="bx--inline-loading__checkmark" points="0.74 3.4 3.67 6.34 9.24 0.74" />
+						</svg>
+					</div>
+					<p data-inline-loading-text-active hidden class="bx--inline-loading__text">
+						Loading data...
+					</p>
+					<p id="restore-lib-inline-loading--finished" data-inline-loading-text-finished hidden class="bx--inline-loading__text">
+						Data imported.
+					</p>
+				</div>
+
+			</div>
+            
+		
+			<div id="tab-panel-2-browse"  class="tab-2-browse" style="position: fixed;top: 3rem;left: 3rem;right:0" role="tabpanel" aria-labelledby="header-menu-2-browse" aria-hidden="false">
+			
+				<div id="tab-panel-2-browse-search"  class="tab-2-browse-search" style="margin: 1rem; overflow: hidden;" role="tabpanel" aria-labelledby="side-menu-2-browse-search" aria-hidden="false" >
+					<div id="tab-panel-2-browse-search-layout" style="display: flex; flex-direction: row; overflow: hidden;">
+						<div id="browse-search-schema-pane"  style="display: flex; flex-direction: column; ">
+							<div id="browse-search-schema-pane-settings" data-tile="expandable" class="bx--tile bx--tile--expandable" tabindex="0" style="background-color:#fff; box-shadow:0 1px 2px 0 rgba(0,0,0,.1); border:1px solid #dfe3e6; padding-top:0.5rem; padding-left:0.5rem; padding-right:1rem; padding-bottom:0rem; margin-bottom:0.5rem; min-height: 2rem;">
+								<button id="browse-search-schema-pane-settings-expand-button" class="bx--tile__chevron" style="position: absolute; top: 0.5rem; right: 0.5rem; height: 1rem;">
+									<svg width="12" height="7" viewBox="0 0 12 7">
+										<path fill-rule="nonzero" d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z" />
+									</svg>
+								</button>
+								<div id="search-config-tile-settings" class="bx--tile-content">
+									<span data-tile-atf class="bx--tile-content__above-the-fold" style="height: 20px">
+										<legend class="bx--label" style="font-weight:600;margin-bottom:0">
+											SEARCH SETTINGS
+										</legend>
+									</span>
+									<span class="bx--tile-content__below-the-fold" style="margin-top:0.5rem">
+                                       
+                                   
+                                          
+                                        <label class="bx--label">Result Limit</label>
+                                        <div class="bx--slider-container" onclick="event.stopPropagation();" style="margin-bottom: 0.5rem;">
+                                            <div class="bx--slider" data-slider data-slider-input-box="#slider-input-box-search" style="min-width: 4rem;">
+                                                <div class="bx--slider__thumb" style="background-color: #24a249;" tabindex="0" > </div>
+                                                <div class="bx--slider__track"></div>
+                                                <div class="bx--slider__filled-track"></div>
+                                                <input aria-label="slider" id="slider-search-limit" class="bx--slider__input" type="range" step="1" min="20" max="500" value="50" />
+                                            </div>
+                                            <label id="slider-input-box_bottom-range-label-search" class="bx--slider__range-label">20</label>
+                                            <label id="slider-input-box_top-range-label-search" class="bx--slider__range-label">500</label>
+                                            <input id="slider-input-box-search" aria-labelledby="slider-input-box_bottom-range-label-search slider-input-box_top-range-label-search" type="number" class="bx--text-input bx--slider-text-input" placeholder="0" / hidden>
+                                        </div>
+                                        
+                                        
+                                        
+                                       <div class="bx--form-item" style="margin-bottom:0.5;">
+                                            <div class="bx--radio-button-group " style="-webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start;">
+                                                <div class="bx--radio-button-wrapper" style="margin-right: 0; margin-bottom: 0.5rem;" title="Instant Search: results displayed as you type">
+                                                  <input id="rb-search-type-keyword" class="bx--radio-button" type="radio" value="keywords" name="rb-search-type" tabindex="0" checked>
+                                                  <label for="rb-search-type-keyword" class="bx--radio-button__label">
+                                                    <span class="bx--radio-button__appearance" style="box-shadow: 0 0 0 0px #0062ff; outline: 1px solid transparent;"></span>
+                                                    <span class="bx--label" style="margin-bottom: 0;">all keywords</span>
+                                                  </label>
+                                                </div>
+                                                <div class="bx--radio-button-wrapper" style="margin-right: 0; margin-bottom: 0.5rem;" title="Full text: press enter for results">
+                                                  <input id="rb-search-type-phrase" class="bx--radio-button" type="radio" value="phrase" name="rb-search-type" tabindex="0">
+                                                  <label for="rb-search-type-phrase" class="bx--radio-button__label">
+                                                    <span class="bx--radio-button__appearance" style="box-shadow: 0 0 0 0px #0062ff; outline: 1px solid transparent;"></span>
+                                                    <span class="bx--label" style="margin-bottom: 0;">full phrase</span>
+                                                  </label>
+                                                </div>
+                                                <div class="bx--radio-button-wrapper" style="margin-right: 0; margin-bottom: 0.5rem;" title="Semantic Search: press enter for results">
+                                                  <input id="rb-search-type-semantic" class="bx--radio-button" type="radio" value="semantic" name="rb-search-type" tabindex="0">
+                                                  <label for="rb-search-type-semantic" class="bx--radio-button__label">
+                                                    <span class="bx--radio-button__appearance" style="box-shadow: 0 0 0 0px #0062ff; outline: 1px solid transparent;"></span>
+                                                    <span class="bx--label" style="margin-bottom: 0;">semantic similarity</span>
+                                                  </label>
+                                                </div>
+                                            </div>
+                                          </div>
+                                       
+									</span>
+								</div>
+							</div>
+							
+                            <div id="browse-search-schema-pane-objecttype" data-tile="expandable" class="bx--tile bx--tile--expandable bx--tile--is-expanded" tabindex="0" style="background-color:#fff; box-shadow:0 1px 2px 0 rgba(0,0,0,.1); border:1px solid #dfe3e6; padding-top:0.5rem; padding-left:0.5rem; padding-right:1rem; padding-bottom:0rem; margin-bottom:0.5rem; min-height: 2rem;">
+							<button class="bx--tile__chevron" style="position: absolute; top: 0.5rem; right: 0.5rem; height: 1rem;">
+								<svg width="12" height="7" viewBox="0 0 12 7">
+									<path fill-rule="nonzero" d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z" />
+								</svg>
+							</button>
+							<div class="bx--tile-content">
+								<span data-tile-atf class="bx--tile-content__above-the-fold" style="height: 20px">
+									<legend class="bx--label" style="font-weight:600;margin-bottom:0">
+										OBJECT TYPE
+									</legend>
+								</span>
+								<span id="search-config-tile-objectType" class="bx--tile-content__below-the-fold" >
+									<div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+									<div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+									<div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+									<div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+									<div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+								</span>
+							</div>
+						</div>
+							
+							
+						</div>
+						
+						<div class="bx--form-item" style="margin-left: 2rem; margin-right: 3rem;  overflow: hidden;">
+							<h3 style="font-weight:200">
+								Model Explorer Search
+							</h3>
+							<div data-search class="bx--search bx--search--sm bx--search--shell" style="margin-top: 1rem;" role="search">
+                                <input class="bx--search-input" type="text" role="search" id="search__input-1" placeholder="Search all glossary content" style="width:100%;" aria-labelledby="search-input-label-2" onkeyup="setTimeout(instantSearch(event));" />
+
+                                <svg  class="bx--search-magnifier" style="z-index: 0;" width="16" height="16" viewBox="0 0 16 16">
+                                    <path d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm4.936-1.27l4.563 4.557-.707.708-4.563-4.558a6.5 6.5 0 1 1 .707-.707z" fill-rule="nonzero" />
+                                </svg>
+
+								<button class="bx--search-close bx--search-close--hidden" title="Clear search input" aria-label="Clear search input">
+									<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+										<path d="M8 6.586L5.879 4.464 4.464 5.88 6.586 8l-2.122 2.121 1.415 1.415L8 9.414l2.121 2.122 1.415-1.415L9.414 8l2.122-2.121-1.415-1.415L8 6.586zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" fill-rule="evenodd" />
+									</svg>
+								</button>
+							</div>
+							
+							<div id="search-result-layout" style=" width:100%; display: flex; flex-direction: row; margin-top: 2rem; margin-bottom: 3rem; overflow: hidden;">
+								
+                                <div id="search-result-name" style="position: fixed; height: auto; width: 28rem; top: 10rem; bottom: 2rem; overflow-y: scroll; background-color: #fff; box-shadow: 0 1px 2px 0 rgba(0,0,0,.1); border: 1px solid #dfe3e6; padding: 1.5rem; ">
+										
+									<ul class="bx--label" id="search-result-name-list" style="line-height: 2; margin-left: 1rem;">
+
+									  <li style="list-style-type: none; font-style: italic;">Results of searching through the <span style="font-weight: bold;">Names</span> will appear here.</li>
+									  
+									</ul>
+
+								</div>
+                                
+                                <div id="search-result-description" style="position: fixed; height: auto; width: auto; top: 10rem; bottom: 2rem; right: 4rem; left: 46rem; overflow-y: scroll; background-color: #fff; box-shadow: 0 1px 2px 0 rgba(0,0,0,.1); border: 1px solid #dfe3e6; padding: 1.5rem;">
+								     <ul class="bx--label" id="search-result-description-list" style="line-height: 2; margin-left: 1rem;">
+
+									  <li style="list-style-type: none; font-style: italic;">Results of searching through the <span style="font-weight: bold;">Descriptions</span> will appear here.</li>
+									  
+									</ul>
+								</div>
+
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			
+				<div id="tab-panel-2-browse-graph"  class="tab-2-browse-graph" style="position: fixed;top:3rem;left: 3rem;right:0rem;bottom:0rem" role="tabpanel" aria-labelledby="side-menu-2-browse-graph" aria-hidden="false" >
+				
+					<div id="browse-graph-canvas" style="position: absolute;top:0rem;left: 0rem;right:0rem;bottom:0rem">
+					</div>
+					
+					<div id="browse-graph-schema-pane"  style="position: absolute;top:1rem;left: 1rem;">
+						<div id="browse-graph-schema-pane-settings" data-tile="expandable" class="bx--tile bx--tile--expandable bx--tile--is-expanded" tabindex="0" style="background-color:#fff; box-shadow:0 1px 2px 0 rgba(0,0,0,.1); border:1px solid #dfe3e6; padding-top:0.5rem; padding-left:0.5rem; padding-right:1rem; padding-bottom:0rem; margin-bottom:0.5rem; min-height: 2rem;">
+							<button class="bx--tile__chevron" style="position: absolute; top: 0.5rem; right: 0.5rem; height: 1rem;">
+								<svg width="12" height="7" viewBox="0 0 12 7">
+									<path fill-rule="nonzero" d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z" />
+								</svg>
+							</button>
+							<div id="graph-config-tile-settings" class="bx--tile-content">
+								<span data-tile-atf class="bx--tile-content__above-the-fold" style="height: 20px">
+									<legend class="bx--label" style="font-weight:600;margin-bottom:0">
+										GRAPH SETTINGS
+									</legend>
+								</span>
+								<span class="bx--tile-content__below-the-fold" style="margin-top:0.5rem">
+                                
+									<label class="bx--label">Expansion Limit</label>
+									<div class="bx--slider-container" onclick="event.stopPropagation();">
+										<div class="bx--slider" data-slider data-slider-input-box="#slider-input-box" style="min-width: 4rem;">
+											<div class="bx--slider__thumb" style="background-color: #24a249;"tabindex="0"> </div>
+											<div class="bx--slider__track"></div>
+											<div class="bx--slider__filled-track"></div>
+											<input aria-label="slider" id="slider-expansion-limit" class="bx--slider__input" type="range" step="1" min="1" max="50" value="50" />
+										</div>
+										<label id="slider-input-box_bottom-range-label" class="bx--slider__range-label">1</label>
+										<label id="slider-input-box_top-range-label" class="bx--slider__range-label">50</label>
+										<input id="slider-input-box" aria-labelledby="slider-input-box_bottom-range-label slider-input-box_top-range-label" type="number" class="bx--text-input bx--slider-text-input" placeholder="0" / hidden>
+									</div>
+                                    
+									<button class="bx--btn bx--btn--primary bx--btn--sm" type="button" style="margin-top:1rem;margin-bottom:0.5rem" onclick="javascript:resetGraph();event.stopPropagation();">
+										Reset View
+									</button>
+                                    
+								</span>
+							</div>
+						</div>
+						
+						<div id="browse-graph-schema-pane-objecttype" data-tile="expandable" class="bx--tile bx--tile--expandable bx--tile--is-expanded" tabindex="0" style="background-color:#fff; box-shadow:0 1px 2px 0 rgba(0,0,0,.1); border:1px solid #dfe3e6; padding-top:0.5rem; padding-left:0.5rem; padding-right:1rem; padding-bottom:0rem; margin-bottom:0.5rem; min-height: 2rem;">
+							<button class="bx--tile__chevron" style="position: absolute; top: 0.5rem; right: 0.5rem; height: 1rem;">
+								<svg width="12" height="7" viewBox="0 0 12 7">
+									<path fill-rule="nonzero" d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z" />
+								</svg>
+							</button>
+							<div class="bx--tile-content">
+								<span data-tile-atf class="bx--tile-content__above-the-fold" style="height: 20px">
+									<legend class="bx--label" style="font-weight:600;margin-bottom:0">
+										OBJECT TYPE
+									</legend>
+								</span>
+								<span id="graph-config-tile-objectType" class="bx--tile-content__below-the-fold" >
+									<div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+									<div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+									<div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+									<div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+									<div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+								</span>
+							</div>
+						</div>
+						
+						<div id="browse-graph-schema-pane-linktype" data-tile="expandable" class="bx--tile bx--tile--expandable bx--tile--is-expanded" tabindex="0" style="background-color:#fff;box-shadow:0 1px 2px 0 rgba(0,0,0,.1);border:1px solid #dfe3e6; padding-top:0.5rem; padding-left:0.5rem; padding-right:1rem; padding-bottom:0rem; margin-bottom:0.5rem; min-height: 2rem;">
+							<button class="bx--tile__chevron" style="position: absolute; top: 0.5rem; right: 0.5rem; height: 1rem;">
+								<svg width="12" height="7" viewBox="0 0 12 7">
+									<path fill-rule="nonzero" d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z" />
+								</svg>
+							</button>
+							<div class="bx--tile-content" >
+								<span data-tile-atf class="bx--tile-content__above-the-fold">
+									<legend class="bx--label" style="font-weight:600;margin-bottom:0">
+										LINK TYPE
+									</legend>
+								</span>
+								<span id="graph-config-tile-linkType" class="bx--tile-content__below-the-fold" >
+									<div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+									<div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+									<div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+									<div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+									<div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+								</span>
+							</div>
+						</div>
+					</div>
+					
+					<div id="browse-graph-detail-pane" class="bx-tile" style="position: absolute;top:1rem;right:1rem; width:15rem;background-color:#fff;box-shadow:0 1px 2px 0 rgba(0,0,0,.1);border:1px solid #dfe3e6;padding:1rem;">
+						<p style="font-weight:bold;">How-to</p><br>
+						<ul class="bx--label" style="line-height: 1.5; font-size: 0.5rem;">
+						    <li style="list-style-type: disc;"><span style="font-weight:bold">View these instructions later?</span><br> Click on the HELP item in the top menu</li>
+							<li style="list-style-type: disc;"><span style="font-weight:bold">Add the neighbours to current visualiation?</span><br> Double-click on a node; can be repeated as nodes are added in batches based on the expansion limit</li>
+							<li style="list-style-type: disc;"><span style="font-weight:bold">Add the neighbours of all nodes of the same type?</span> Double-click on a node while holding down the SHIFT key; all displayed nodes of the same type will be expanded</li>
+							<li style="list-style-type: disc;"><span style="font-weight:bold">Undo the last expansion (adding of neighbours)?</span><br> Press Ctrl+Z to remove all nodes added in most recent expansion</li>
+							<li style="list-style-type: disc;"><span style="font-weight:bold">Start a new visualisation with the node and its neighbours?</span><br> Double-click on a node with CTRL key down</li>
+							<li style="list-style-type: disc;"><span style="font-weight:bold">Delete selected node or edge?</span><br> Press the DEL key</li>
+							<li style="list-style-type: disc;"><span style="font-weight:bold">Delete all nodes with object type of selected node?</span><br> Press the DEL key while holding down the SHIFT key; all displayed nodes of the same type will be deleted</li>
+							<li style="list-style-type: disc;"><span style="font-weight:bold">Show description and other properties in this box?</span><br> Select the node with a single click</li>
+							<li style="list-style-type: disc;"><span style="font-weight:bold">Lock a position of a certain node?</span><br> Drag and drop the node</li>
+							<li style="list-style-type: disc;"><span style="font-weight:bold">Fix position of all nodes?</span><br> Press "F" key to fix position of all nodes </li>
+							<li style="list-style-type: disc;"><span style="font-weight:bold">Release a single locked node?</span><br> Select the node and then right click anywhere on canvas</li>
+							<li style="list-style-type: disc;"><span style="font-weight:bold">Reset the visualisation layout?</span> Press BACKSPACE key to release all nodes locked in positions</li>
+							<li style="list-style-type: disc;"><span style="font-weight:bold">Switch to hierarchical layout?</span> Press "H" key to switch to hierarchical layout (press "H" multiple times to try different styles)</li>
+							<li style="list-style-type: disc;"><span style="font-weight:bold">Stop the wobbling?</span><br> Press SPACE key or double-click anywhere on the canvas (not on a node or an edge)</li>
+							<li style="list-style-type: disc;"><span style="font-weight:bold">Identify the last expanded node?</span><br> It has a black border (if not selected)</li>
+							<li style="list-style-type: disc;"><span style="font-weight:bold">Increase the number of neighbour nodes added in a single expansion (double-click)?</span><br> Update the expansion limit by moving the slider in the left pane</li>
+							<li style="list-style-type: disc;"><span style="font-weight:bold">Move the canvas or zomm in/out?</span><br> Drag&drop the canvas to move and use mouse whell to zoom/in and out</li>
+							<li style="list-style-type: disc;"><span style="font-weight:bold">Increase/Reduce size of UI elements?</span><br> Press Ctrl++ for increase and Ctrl+- in browser or use mouse wheel while holding down the CTRL key to reduce size of UI elements</li>
+							<li style="list-style-type: disc;"><span style="font-weight:bold">Preset the name of export file?</span><br> Click on a node of which name you want to use as the name of the exported files (image or JSON)</li>
+						</ul>
+					</div>
+				</div>
+				
+				<div id="tab-panel-2-browse-library"  class="tab-2-browse-library" style="position: fixed;top:3rem;left: 3rem;right:0rem;bottom:0rem; background-color: #f3f3f3;text-align: left;" role="tabpanel" aria-labelledby="side-menu-2-browse-library" aria-hidden="false" >
+					
+
+                        <div class="bx--form-item" style="position: fixed;top:3rem;left: 3rem;right:0rem;bottom:0rem; margin-left: 2rem; margin-top: 2rem; ">
+                            <h3 style="font-weight:400" >
+                                Library
+                            </h3>
+                             
+                                <div id="library-tiles" style="position: fixed;top:7rem;left: 4rem;right:0rem;bottom:0rem; margin-left: 0rem; margin-top: 0rem; display: inline-block; overflow-y: scroll;">
+                                    <p style="color: #171717; display: inline-block; margin: 1rem;">
+                                        <span style="font-weight: 600">Your visualisation library is empty.</span><br>
+                                        Add items to library using context menu in right top corner.
+                                    </p>
+                                </div>
+                            
+                        </div>
+                    
+                    
+                
+
+				</div>
+                
+				<div id="tab-panel-2-browse-about"  class="tab-2-browse-about" style="position: fixed;top:3rem;left: 3rem;right:0rem;bottom:0rem; background-color: #f3f3f3;text-align: center;" role="tabpanel" aria-labelledby="side-menu-2-browse-about" aria-hidden="false" >
+					
+					<h3 style="font-weight:200" style="">
+					<br>
+						Model Explorer<br><br>
+						<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+										<path d="M16,30A14,14,0,1,1,30,16,14,14,0,0,1,16,30ZM16,4A12,12,0,1,0,28,16,12,12,0,0,0,16,4Z"></path><polygon points="20.59 22 15 16.41 15 7 17 7 17 15.58 22 20.59 20.59 22"></polygon>
+									</svg>
+					</h3>
+
+				</div>
+				
+			</div>
+			
+			<div id="notif-panel" style="position: fixed;bottom:0;right:0;">
+			
+			</div>
+		
+
+			<div id="tab-panel-3-help" class="tab-3-help" style="margin: 4rem 4rem" role="tabpanel" aria-labelledby="header-menu-3-help" aria-hidden="true" hidden >
+				<h3 style="font-weight:200">
+					Model Explorer Help
+				</h3>
+				<div style="margin-top: 1rem">
+					<h5>
+						Model Explorer Visualisation How-to:
+					</h5>
+
+					<ul class="bx--list--unordered" style="margin-top: 0.5rem">
+						<li class="bx--list__item">
+							<span style="font-weight:bold">Add the neighbours to current visualiation?</span> Double-click on a node; can be repeated as nodes are added in batches based on the expansion limit
+						</li>
+						<li class="bx--list__item">
+							<span style="font-weight:bold">Add the neighbours of all nodes of the same type?</span> Double-click on a node while holding down the SHIFT key; all displayed nodes of the same type will be expanded
+						</li>
+						<li class="bx--list__item">
+							<span style="font-weight:bold">Undo the last expansion (adding of neighbours)?</span> Press Ctrl+Z to remove all nodes added in most recent expansion
+						</li>
+						<li class="bx--list__item">
+							<span style="font-weight:bold">Start a new visualisation with the node and its neighbours?</span> Double-click on a node with CTRL key down
+						</li>
+						<li class="bx--list__item">
+							<span style="font-weight:bold">Delete selected node or edge?</span> Press the DEL key
+						</li>
+						<li class="bx--list__item">
+							<span style="font-weight:bold">Delete all nodes with object type of selected node?</span> Press the DEL key while holding down the SHIFT key; all displayed nodes of the same type will be deleted
+						</li>
+						<li class="bx--list__item">
+							<span style="font-weight:bold">Show description and other properties?</span> Select the node with a single click
+						</li>
+						<li class="bx--list__item">
+							<span style="font-weight:bold">Lock a position of a certain node?</span> Drag and drop the node
+						</li>
+						<li class="bx--list__item">
+							<span style="font-weight:bold">Fix position of all nodes?</span> Press "F" key to fix position of all nodes 
+						</li>
+						<li class="bx--list__item">
+							<span style="font-weight:bold">Release a single locked node?</span> Select the node and then right click anywhere on canvas
+						</li>
+						<li class="bx--list__item">
+							<span style="font-weight:bold">Reset the visualisation layout?</span> Press BACKSPACE key to release all nodes locked in positions
+						</li>
+						<li class="bx--list__item">
+							<span style="font-weight:bold">Switch to hierarchical layout?</span> Press "H" key to switch to hierarchical layout (press "H" multiple times to try different styles)
+						</li>
+						<li class="bx--list__item">
+							<span style="font-weight:bold">Stop the wobbling?</span> Press SPACE key or double-click anywhere on the canvas (not on a node or an edge)
+						</li>
+						<li class="bx--list__item">
+							<span style="font-weight:bold">How to I know which is the last expanded node?</span> It has a black border (if not selected)
+						</li>
+						<li class="bx--list__item">
+							<span style="font-weight:bold">Increase the number of neighbour nodes added in a single expansion (double-click)</span> Update the expansion limit by moving the slider in the left pane
+						</li>
+						<li class="bx--list__item">
+							<span style="font-weight:bold">Move the canvas or zomm in/out?</span> Drag&drop the canvas to move and use mouse whell to zoom/in and out
+						</li>
+						<li class="bx--list__item">
+							<span style="font-weight:bold">Increase/Reduce size of UI elements?</span> Press Ctrl++ for increase and Ctrl+- in browser or use mouse wheel while holding down the CTRL key to reduce size of UI elements
+						</li>
+						<li class="bx--list__item">
+							<span style="font-weight:bold">Preset the name of export file?</span> Click on a node of which name you want to use as the name of the exported files (image or JSON)
+						</li>
+					</ul>
+				</div>
+				
+			</div>
+				
+		</div>
+        
+        <script>
+            'use strict';
+
+			let glossary = {};
+        </script>
+        
+		<script type="text/javascript" src="../common/js/external/carbon-components.min.js"></script>
+		<script type="text/javascript" src="../common/js/external/vis.js"></script> 
+		<script type="text/javascript" src="../common/js/external/lunr.js"></script>
+        
+        <script type="text/javascript" src="../common/js/tfjs/tf-core.min.js"></script>
+        <script type="text/javascript" src="../common/js/tfjs/tf-converter.min.js"></script>
+        <script type="text/javascript" src="../common/js/tfjs/tf-backend-cpu.min.js"></script>
+        <script type="text/javascript" src="../common/js/tfjs/universal-sentence-encoder.min.js"></script>
+
+		<script type="text/javascript" src="../common/js/glossaryBrowseGraphMin.js"></script>
+		<script type="text/javascript" src="../common/js/glossaryViewerMainMin.js"></script>
+
+		
+		<script type="text/javascript" src="./content/schemaOrg-00.js"></script>
+		<script type="text/javascript" src="./content/schemaOrg-01.js"></script>
+		<script type="text/javascript" src="./content/schemaOrg-02.js"></script>
+		<script type="text/javascript" src="./content/schemaOrg-03.js"></script>
+
+	</body>
+
+</html>
