@@ -855,15 +855,15 @@
         <script type="text/javascript" src="../common/js/tfjs/tf-converter.min.js"></script>
         <script type="text/javascript" src="../common/js/tfjs/tf-backend-cpu.min.js"></script>
         <script type="text/javascript" src="../common/js/tfjs/universal-sentence-encoder.min.js"></script>
-
-		<script type="text/javascript" src="../common/js/glossaryBrowseGraphMin.js"></script>
-		<script type="text/javascript" src="../common/js/glossaryViewerMainMin.js"></script>
-
 		
 		<script type="text/javascript" src="./content/schemaOrg-00.js"></script>
 		<script type="text/javascript" src="./content/schemaOrg-01.js"></script>
 		<script type="text/javascript" src="./content/schemaOrg-02.js"></script>
 		<script type="text/javascript" src="./content/schemaOrg-03.js"></script>
+
+		<!-- glossaryBrowseGraphMin.js needs to be after the 00 content js file which includes definition of vriables visLibraryPrefix and rootNodeId-->
+		<script type="text/javascript" src="../common/js/glossaryBrowseGraphMin.js"></script>
+		<script type="text/javascript" src="../common/js/glossaryViewerMainMin.js"></script>
 
 	</body>
 
